@@ -17,7 +17,7 @@ template<int a, int b> struct FillGcd {
 	static const int value = Gcd<a, b>::value;
 	static void fill() {
 		if (!ans[a][b]) {
-			ans[a][b] = value;
+			ans[a][b] = value; ans[a][b] = value;
 			FillGcd<a - 1, b>::fill();
 			FillGcd<a, b - 1>::fill();
 		}
