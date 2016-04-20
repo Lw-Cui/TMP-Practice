@@ -1,7 +1,7 @@
 #include <iostream>
 #include "infrastructure.hpp"
 namespace {
-	const int LEN = 10;
+	const int LEN = 100;
 	int ans[LEN + 1][LEN + 1];
 }
 
@@ -13,13 +13,14 @@ template<int big> struct Gcd<big, 0> {
 	static const int value = big;
 };
 
-template<int a, int b> struct FillGcd
-	:public FillGcd<a - 1, b>, FillGcd<a, b - 1> {
+template<int a, int b> struct FillGcd {
 	static const int value = Gcd<a, b>::value;
 	static void fill() {
-		ans[a][b] = value;
-		FillGcd<a - 1, b>::fill();
-		FillGcd<a, b - 1>::fill();
+		if (!ans[a][b]) {
+			ans[a][b] = value;
+			FillGcd<a - 1, b>::fill();
+			FillGcd<a, b - 1>::fill();
+		}
 	}
 };
 
